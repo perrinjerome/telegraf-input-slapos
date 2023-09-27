@@ -271,8 +271,8 @@ func (s *SlapOSMetricCollector) sendProcessMetric(
 	a.AddFields("slapos",
 		fields,
 		map[string]string{
-			"name":     p.Name,
-			"slappart": partitionTagPrefix + p.Group,
+			"name":      p.Name,
+			"reference": partitionTagPrefix + p.Group,
 		},
 	)
 }

@@ -75,7 +75,7 @@ func (s *DummySupervisor) Close() {
 func getNormalizedTelegrafMetrics(t *testing.T, acc *testutil.Accumulator) []telegraf.Metric {
 	metrics := acc.GetTelegrafMetrics()
 	sort.Slice(metrics, func(i, j int) bool {
-		return metrics[i].Tags()["slappart"]+metrics[i].Tags()["name"] < metrics[j].Tags()["slappart"]+metrics[j].Tags()["name"]
+		return metrics[i].Tags()["reference"]+metrics[i].Tags()["name"] < metrics[j].Tags()["reference"]+metrics[j].Tags()["name"]
 	})
 	for _, metric := range metrics {
 		if v, ok := metric.GetField("state"); ok && v.(SupervisorProcessState) == RUNNING {
@@ -147,8 +147,8 @@ func TestSlapOSGeneratesMetrics(t *testing.T) {
 			testutil.MustMetric(
 				"slapos",
 				map[string]string{
-					"slappart": "slappart1",
-					"name":     "prog1",
+					"reference": "slappart1",
+					"name":      "prog1",
 				},
 				map[string]interface{}{
 					"state":       20,
@@ -160,8 +160,8 @@ func TestSlapOSGeneratesMetrics(t *testing.T) {
 			testutil.MustMetric(
 				"slapos",
 				map[string]string{
-					"slappart": "slappart1",
-					"name":     "prog2",
+					"reference": "slappart1",
+					"name":      "prog2",
 				},
 				map[string]interface{}{
 					"state":       20,
@@ -173,8 +173,8 @@ func TestSlapOSGeneratesMetrics(t *testing.T) {
 			testutil.MustMetric(
 				"slapos",
 				map[string]string{
-					"slappart": "slappart1",
-					"name":     "prog3",
+					"reference": "slappart1",
+					"name":      "prog3",
 				},
 				map[string]interface{}{
 					"state":       0,
@@ -214,8 +214,8 @@ func TestSlapOSGeneratesMetricsFilterProcessNames(t *testing.T) {
 			testutil.MustMetric(
 				"slapos",
 				map[string]string{
-					"slappart": "slappart1",
-					"name":     "prog3",
+					"reference": "slappart1",
+					"name":      "prog3",
 				},
 				map[string]interface{}{
 					"state":       0,
@@ -266,8 +266,8 @@ func TestSlapOSGeneratesMetricsRecursively(t *testing.T) {
 			testutil.MustMetric(
 				"slapos",
 				map[string]string{
-					"slappart": "slappart1:slappart1",
-					"name":     "prog1",
+					"reference": "slappart1:slappart1",
+					"name":      "prog1",
 				},
 				map[string]interface{}{
 					"state":       20,
@@ -279,8 +279,8 @@ func TestSlapOSGeneratesMetricsRecursively(t *testing.T) {
 			testutil.MustMetric(
 				"slapos",
 				map[string]string{
-					"slappart": "slappart1:slappart1",
-					"name":     "prog2",
+					"reference": "slappart1:slappart1",
+					"name":      "prog2",
 				},
 				map[string]interface{}{
 					"state":       20,
@@ -292,8 +292,8 @@ func TestSlapOSGeneratesMetricsRecursively(t *testing.T) {
 			testutil.MustMetric(
 				"slapos",
 				map[string]string{
-					"slappart": "slappart1:slappart1",
-					"name":     "prog3",
+					"reference": "slappart1:slappart1",
+					"name":      "prog3",
 				},
 				map[string]interface{}{
 					"state":       0,
@@ -305,8 +305,8 @@ func TestSlapOSGeneratesMetricsRecursively(t *testing.T) {
 			testutil.MustMetric(
 				"slapos",
 				map[string]string{
-					"slappart": "slappart1",
-					"name":     "prog1",
+					"reference": "slappart1",
+					"name":      "prog1",
 				},
 				map[string]interface{}{
 					"state":       20,
@@ -318,8 +318,8 @@ func TestSlapOSGeneratesMetricsRecursively(t *testing.T) {
 			testutil.MustMetric(
 				"slapos",
 				map[string]string{
-					"slappart": "slappart1",
-					"name":     "prog2",
+					"reference": "slappart1",
+					"name":      "prog2",
 				},
 				map[string]interface{}{
 					"state":       20,
@@ -331,8 +331,8 @@ func TestSlapOSGeneratesMetricsRecursively(t *testing.T) {
 			testutil.MustMetric(
 				"slapos",
 				map[string]string{
-					"slappart": "slappart1",
-					"name":     "prog3",
+					"reference": "slappart1",
+					"name":      "prog3",
 				},
 				map[string]interface{}{
 					"state":       0,
